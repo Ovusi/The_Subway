@@ -1,3 +1,4 @@
+#!/usr/bin/python3.8
 import sys
 import socket
 
@@ -18,8 +19,8 @@ def banner():
 
 def download():
     try:
-        f = input('Type file name: ')
-        file = str(f)
+        f = input('Type file name: ').encode()
+        file = bytes(f)
         sock.send(file)
         f = open(file, 'wb')
         i = sock.recv(BUFFER_SIZE)
@@ -63,7 +64,7 @@ def connect():
                 sock.close()
                 sys.exit()
             elif cmd == 'download':
-                client_socket.send(cmd)
+                #client_socket.send(cmd)
                 download()
             else:
                 client_socket.send(cmd.encode())

