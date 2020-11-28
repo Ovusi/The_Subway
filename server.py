@@ -7,6 +7,15 @@ SERVER_PORT = 4444
 BUFFER_SIZE = 1024
 
 
+def banner():
+    print(
+'''
+<---------------------------------->
+            THE SUBWAY                >
+<---------------------------------->
+''')
+
+
 def download():
     try:
         f = input('Type file name: ')
@@ -63,4 +72,6 @@ def connect():
             continue
 
 
-connect()
+if __name__ == '__main__':
+    banner()
+    connect()
